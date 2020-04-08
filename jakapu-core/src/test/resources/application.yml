@@ -1,0 +1,66 @@
+server:
+  servlet:
+    contextPath: /jakapu
+  port: 9090
+
+spring:
+  jmx:
+    enabled: true
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+  main:
+    allow-bean-definition-overriding: true
+
+jakapu:
+  kafka:
+    security:
+      enabled: true
+      protocol: SSL
+    ssl:
+      protocol: TLSv1.2
+      keystore:
+        type: JKS
+        location: Path-to-yourprivate-keystore.jks
+        password: $$$$
+      key:
+        password: $$$$
+      truststore:
+        location: Path-to-your-kafka-client-truststore.jks
+        password: $$$$
+    bootstrap-servers: "yourkafkabrokerhost:port"
+  psf:
+    publisher:
+      topics:
+        - name: Kafka-Topic-Name
+          id: t1
+          numPartitions: 2
+          replication-factor: 1
+        - name: Kafka-Topic-Name-2
+          id: t2
+          numPartitions: 0
+          replication-factor: 1
+
+    ## add those headerAttribute below which you want to behave as mandatory kafka headers which
+    ## should be published from kafka publisher
+    payload:
+      headerAttribute:
+        source-type: "re(jakapu.psf.payload.headerTopicMap)"
+        event-type: "rx(\\w{1,})"
+        source-uniqueid: "rx(\\w{1,})"
+        source-timestamp: "rx(\\d{13})"
+      ## below topic names should be passed as value to "source-type" header
+      ## example Key Value =  source-type : MySource1
+      headerTopicMap:
+        MySource1: t1
+        MySource2: t2
+
+logging:
+  level:
+    root: info
+    org.apache.kafka: info
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
