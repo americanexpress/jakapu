@@ -71,18 +71,36 @@ public class PublisherConfig {
     @Value("${jakapu.kafka.ssl.truststore.password}")
     private String truststorePassword;
 
+    @Value("${jakapu.kafka.acks:1}")
+    private String acks_config;
+
+    @Value("${jakapu.kafka.retry:1}")
+    private String retry_config;
+
+    @Value("${jakapu.kafka.key_serializer_class:org.apache.kafka.common.serialization.StringSerializer}")
+    private String key_serializer_class;
+
+    @Value("${jakapu.kafka.value_serializer_class:org.apache.kafka.common.serialization.StringSerializer}")
+    private String value_serializer_class;
+
 
     @Bean
     public Map<String, Object> SenderConfigs() {
         Map<String, Object> props = new HashMap<>();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapServers);
-        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        props.put(ProducerConfig.ACKS_CONFIG, "1");
-        props.put(ProducerConfig.RETRIES_CONFIG, "1");
+
+        try {
+            props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapServers);
+            props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, Class.forName(key_serializer_class));
+            props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, Class.forName(value_serializer_class));
+            props.put(ProducerConfig.ACKS_CONFIG, acks_config);
+            props.put(ProducerConfig.RETRIES_CONFIG, retry_config);
+        } catch (ClassNotFoundException e) {
+            logger.error("serializer class not found defaulting to string" + e);
+            props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+            props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        }
 
         logger.info("security protocol {}", securityProtocol);
-
 
         if (Boolean.valueOf(securitEnabled)) {
             props.put("security.protocol", securityProtocol);

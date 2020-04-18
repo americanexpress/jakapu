@@ -28,6 +28,11 @@ jakapu:
         location: Path-to-your-kafka-client-truststore.jks
         password: $$$$
     bootstrap-servers: "yourkafkabrokerhost:port"
+    acks: 1  # optional default to 1
+    retry: 1 # optional default to 1
+    key_serializer_class: org.apache.kafka.common.serialization.StringSerializer # Fully Qualified Name optional default to String
+    value_serializer_class: org.apache.kafka.common.serialization.StringSerializer # Fully Qualified Name optional default to String
+
   psf:
     publisher:
       topics:
