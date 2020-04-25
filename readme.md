@@ -1,12 +1,15 @@
-
-### Java Kafka Publisher (JaKaPu)
-
-![JaKaPu](images/jakapu.png) 
+<h1 align="center">
+Java Kafka Publisher (JaKaPu)
+</h1>
+<h1 align="center">
+  <img src='images/jakapu.png' alt="Jakapu - Amex" width='50%'/>
+</h1>
 
 **Jakapu is a config driven SDK to publish events into any Kafka topic without writing code**
 
 
-#### Features
+## ✨ Features
+
 - Build a Kafka Publisher with a single @annotation
 - Convert your existing Springboot app to a Kafka publisher
 - Publish message into multiple kafka topics
@@ -17,14 +20,15 @@
 - Also provides a REST API end point @/jakapu/publish to publish messages into kakfa
 
 
-#### Prerequisite
+## 📖 Prerequisites
+
 - Maven 3+
 - Java 8+
 - Spring framework
 - Kafka Topic
 
             
-#### Getting Started
+## 🤹‍ Getting Started
 
 
 ##### Add maven dependency
@@ -129,7 +133,7 @@ curl -H 'content-type: application/json' \
 https://hostname/jakapu/publish
 ```
 
-### Contributing
+## 🏆 Contributing
 
 We welcome Your interest in the American Express Open Source Community on Github. Any Contributor to
 any Open Source Project managed by the American Express Open Source Community must accept and sign
@@ -139,11 +143,13 @@ reserve all right, title, and interest, if any, in and to Your Contributions. Pl
 [fill out the Agreement](https://cla-assistant.io/americanexpress/jakapu).
 
 
-### License
+## 🗝️ License
+
 Any contributions made under this project will be governed by the
 [Apache License 2.0](./LICENSE.txt).
 
 
-### Code of Conduct
+## 🗣️ Code of Conduct
+
 This project adheres to the [American Express Community Guidelines](./CODE_OF_CONDUCT.md). 
 By participating, you are expected to honor these guidelines.
