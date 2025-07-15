@@ -13,7 +13,7 @@ JaKaPu is a config-driven SDK to publish events to Kafka topics without writing 
 
 ## ✨ Features
 
-- Build a Kafka Publisher using a single annotation
+- Build a Kafka Publisher using a single @annotation
 - Seamlessly integrate into existing Spring Boot applications
 - Publish messages to multiple Kafka topics
 - Route messages based on header keys
@@ -47,13 +47,13 @@ JaKaPu is a config-driven SDK to publish events to Kafka topics without writing 
 ##### Add @EnableJakapu as a dependency annotation on Spring Boot Main Application class.
 
 ```java
-     @EnableJakapu
-      public class SampleSpringApplication {
+  @EnableJakapu
+  public class SampleSpringApplication {
 
-      public static void main(String[] args) {
-          logger.info("Spring Boot Sample App Started.............");
-          ApplicationContext app = SpringApplication.run(SampleSpringApplication.class);
-      }
+    public static void main(String[] args) {
+        logger.info("Spring Boot Sample App Started.............");
+        ApplicationContext app = SpringApplication.run(SampleSpringApplication.class);
+    }
   }
 ```
 
@@ -61,7 +61,7 @@ JaKaPu is a config-driven SDK to publish events to Kafka topics without writing 
 
     - Dynamically add any number of topics to your configuration under **jakapu.psf.publisher.topics**
     - Define mandatory kafka header attribute names and their validation pattern(**jakapu.psf.publisher.payload.headerAttribute**)
-    - header-based topic routing can be added in the configuration under **Jakapu.psf.publisher.headerTopicMap**
+    - Header-based topic routing can be added in the configuration under **Jakapu.psf.publisher.headerTopicMap**
 
 ```yaml
 jakapu:
